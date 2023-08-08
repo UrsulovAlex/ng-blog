@@ -1,0 +1,15 @@
+<ng-container *ngIf="posts?.length">
+    <app-post-list 
+        *ngFor="let item of posts; trackBy: trackByFn" 
+        [data]="item"
+        class="mb-16"
+        ></app-post-list>
+    <mat-paginator #paginator
+        (page)="handlePageEvent($event)"
+        [showFirstLastButtons]="showFirstLastButtons"
+        [pageSizeOptions]="pageSizeOptions"
+        [length]="paginatorOptionsData.total"
+        [pageSize]="paginatorOptionsData.per_page"
+        [pageIndex]="pageIndex">
+    </mat-paginator>
+</ng-container>

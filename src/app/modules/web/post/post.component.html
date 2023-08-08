@@ -1,0 +1,18 @@
+<h2>{{postData.title}}</h2>
+<h3>{{postData.author.nickName}}
+    <span>createdAt: {{postData.createdAt}}</span> 
+    <span *ngIf="postData.createdAt !== postData.updatedAt">
+        updatedAt: {{postData.updatedAt}}
+    </span>
+    <span>Category: {{postData.nameCategory.title}}</span>
+</h3>
+<p>
+    {{postData.text}}
+</p>
+<ng-container *ngIf="postData.postComments.length">
+    <app-comments 
+        *ngFor="let comments of postData.postComments"
+        [data]="comments"
+        class="mb-16"> 
+    </app-comments>
+</ng-container>

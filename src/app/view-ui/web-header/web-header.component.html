@@ -1,0 +1,21 @@
+<mat-toolbar color="primary">
+    <span>My App</span>
+    <a mat-icon-button [routerLink]="['login']" class="align-itmes_r">
+        <mat-icon>login</mat-icon>
+    </a>
+    <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="user?.role === userRole.user">
+        <mat-icon>manage_accounts</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" >
+        <div mat-menu-item appStopEvent disableRipple = "true" class="mat-mdc-menu-item_no_hover">
+            <p><mat-icon>account_box</mat-icon>
+                <span>User</span>
+            </p>
+            <p>Lorem ipsum dolor sit amet.</p>
+        </div>
+        <button mat-menu-item (click)="onLogaout()">
+            <mat-icon>logout</mat-icon>
+            <span>Logout</span>
+        </button>
+    </mat-menu>
+</mat-toolbar>

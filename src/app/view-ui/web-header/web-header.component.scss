@@ -1,0 +1,6 @@
+.mat-mdc-menu-item:hover:not([disabled]) {
+    &.mat-mdc-menu-item_no_hover {
+        cursor: default;
+        background: transparent;
+    }
+}

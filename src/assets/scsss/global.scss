@@ -1,0 +1,13 @@
+@use "sass:map";
+@import "useful-classes";
+@import "custom-matirial";
+
+
+.container {
+    width: 100%;;
+    padding: map.get($indents-sizes, "16");
+
+    &_flex {
+        display: flex;
+    }
+}

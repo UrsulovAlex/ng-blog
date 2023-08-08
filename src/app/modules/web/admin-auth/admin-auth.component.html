@@ -1,0 +1,41 @@
+<mat-card class="login align-items_x_center align-items_y_center">
+    <mat-card-content>
+        <h2>{{title}}</h2>
+        <form [formGroup]="formGroup"
+            class="login-form"
+            (ngSubmit)="onSubmit()">
+            <app-input-form
+                label="Login"
+                type="text"
+                placeholder="Login"
+                [control] = "$any(formGroup.get('login'))"
+                class="login__input-control"
+                >
+            </app-input-form>
+            <app-input-form
+                label="Пароль"
+                type="password"
+                placeholder="Password"
+                [control] = "$any(formGroup.get('password'))"
+                class="login__input-control"
+                >
+            </app-input-form>
+            <app-input-form
+                *ngIf="register"
+                label="NickName"
+                type="text"
+                placeholder="nickName"
+                [control] = "$any(formGroup.get('nickName'))"
+                class="login__input-control"
+            >
+        </app-input-form>
+            <div class="mt-16">
+                <button mat-raised-button 
+                    type="submit" 
+                    color="primary"
+                    class="align-items_x_center"
+                    [disabled]="formGroup.invalid">{{title}}</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,85 @@
+$indents-sizes: (
+    "4": 4px,
+    "8": 8px,
+    "12": 12px,
+    "16": 16px,
+    "20": 20px,
+    "24": 24px,
+    "32": 32px,
+    "36": 36px,
+    "40": 40px,
+);
+
+//utility padding
+@each $name, $size in $indents-sizes {
+    .p-#{$name} {
+        padding: $size;
+    }
+}
+
+@each $name, $size in $indents-sizes {
+    .pl-#{$name} {
+        padding-left: $size;
+    }
+}
+
+@each $name, $size in $indents-sizes {
+    .pr-#{$name} {
+        padding-right: $size;
+    }
+}
+
+@each $name, $size in $indents-sizes {
+    .pb-#{$name} {
+        padding-bottom: $size;
+    }
+}
+
+
+//utility margin
+@each $name, $size in $indents-sizes {
+    .m-#{$name} {
+        margin: $size;
+    }
+}
+
+@each $name, $size in $indents-sizes {
+    .ml-#{$name} {
+        margin-left: $size;
+    }
+}
+
+@each $name, $size in $indents-sizes {
+    .mr-#{$name} {
+        margin-right: $size;
+    }
+}
+
+@each $name, $size in $indents-sizes {
+    .mb-#{$name} {
+        margin-bottom: $size !important;
+    }
+}
+
+//align items
+.align-itmes_r {
+    margin-left: auto;
+}
+
+.align-itmes_left {
+    margin-right: auto;
+}
+
+.align-items_bottom {
+    margin-top: auto;
+}
+
+.align-items_x_center {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.align-items_y_center {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+}
