@@ -1,12 +1,11 @@
 import { Injectable } from "@angular/core";
 import {HttpClient} from '@angular/common/http';
-import { EMPTY, Observable, of } from "rxjs";
-import {catchError, filter, map, retry, tap} from 'rxjs/operators';
+import { Observable } from "rxjs";
+import {filter, map,} from 'rxjs/operators';
 import { AuthData } from "../admin-auth.reducer";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Store, select } from "@ngrx/store";
-import { getAuthData, getServerError } from "../admin-auth.selectors";
-import { loginFailed } from "../admin-auth.actions";
+import { getAuthData, } from "../admin-auth.selectors";
 
 @Injectable({
     providedIn: 'root'

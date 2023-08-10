@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, fromEvent, of, throwError, timer} from 'rxjs';
+import { fromEvent, timer} from 'rxjs';
 import { extractLoginData, initAdminAuth, login, loginFailed, loginSuccess, logout, logoutSuccess } from "@shared/modules/auth/admin-auth-store/store/admin-auth.actions";
 import { AuthData } from "@shared/modules/auth/admin-auth-store/store/admin-auth.reducer";
-import {catchError, distinctUntilChanged, filter, first, map, skip, switchMap, tap} from 'rxjs/operators';
+import { distinctUntilChanged, filter, first, map, skip, switchMap, tap} from 'rxjs/operators';
 import { AuthService } from "@shared/modules/auth/admin-auth-store/store/services/auth.service";
 import { Store, select } from "@ngrx/store";
 import { getAuthData, isAuth } from "@shared/modules/auth/admin-auth-store/store/admin-auth.selectors";
