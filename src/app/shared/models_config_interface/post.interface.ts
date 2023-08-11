@@ -6,6 +6,9 @@ export interface IPost {
     author: Partial<IUser>;
     createdAt: string;
     nameCategory: ICategory,
+    text: string;
+    title: string;
+    updatedAt: string,
 }
 
 export interface IPostResponse {

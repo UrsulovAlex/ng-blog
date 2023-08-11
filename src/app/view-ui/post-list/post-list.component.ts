@@ -4,6 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { TruncatePipe } from '@shared/pipes/truncate.pipe';
+import { IPost } from '@shared/models_config_interface/post.interface';
 
 @Component({
   selector: 'app-post-list',
@@ -14,7 +15,7 @@ import { TruncatePipe } from '@shared/pipes/truncate.pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostListComponent {
-  @Input() data: any;
+  @Input() data!: IPost;
   private router = inject(Router);
 
   showPost(): void {

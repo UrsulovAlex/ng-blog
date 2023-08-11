@@ -1,15 +1,15 @@
 <article>
     <mat-card>
         <mat-card-header>
-            <mat-card-title>{{data?.title}}</mat-card-title>
+            <mat-card-title>{{data.title}}</mat-card-title>
             <mat-card-subtitle>
-                <span *ngIf="data?.nameCategory?.title">Category: {{data?.nameCategory?.title}}</span>  
-                <span *ngIf="data?.author?.nickName" class="pl-16">Autor: {{data?.author?.nickName}}</span>
+                <span *ngIf="data?.nameCategory?.title">Category: {{data.nameCategory.title}}</span>  
+                <span *ngIf="data?.author?.nickName" class="pl-16">Autor: {{data.author.nickName}}</span>
             </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
           <p>
-            {{data?.text | truncate:20}}
+            {{data.text | truncate:20}}
           </p>
         </mat-card-content>
         <mat-card-actions>
