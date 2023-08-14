@@ -4,9 +4,9 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpErrorResponse
+  HttpErrorResponse,
 } from '@angular/common/http';
-import { EMPTY, Observable, catchError, retry } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
@@ -21,7 +21,7 @@ export class InterceptorErrorInterceptor implements HttpInterceptor {
       catchError( err => {
         if (err instanceof HttpErrorResponse) {
           if (err.status !== 401) {
-              this.snackBar.open(err.statusText, 'close', {duration: 5000});
+            this.snackBar.open(err.statusText, 'close', {duration: 5000});
           }
         }
         throw err;

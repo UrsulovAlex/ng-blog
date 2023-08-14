@@ -32,12 +32,12 @@
             "styles": [
               "src/styles.scss",
               {
-                "input": "src/styles/second-theme.scss",
+                "input": "src/second-theme.scss",
                 "bundleName": "second-theme",
                 "inject": false
               }
             ],
-            "scripts": [],
+            "scripts": []
           },
           "configurations": {
             "production": {

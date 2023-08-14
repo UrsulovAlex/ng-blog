@@ -12,7 +12,7 @@ export enum ThemeClass {
 }
 
 export enum ThemeHref {
-    SECOND_THEME = 'src/styles/second-theme.scss',
+    SECOND_THEME = 'second-theme.css',
 }
 
 

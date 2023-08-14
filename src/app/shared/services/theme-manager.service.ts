@@ -39,7 +39,8 @@ export class ThemeManagerService {
   }
   
   createLinkElementWithKey(key: string) {
-    const linkEl = this.renderer.createElement('link');
+    const linkEl: HTMLLinkElement = this.document.createElement('link');
+    linkEl.setAttribute('rel', 'stylesheet');
     linkEl.setAttribute('type', 'text/css');
     linkEl.setAttribute('href', THEME_CONFIG[Theme.SECOND_THEME].href);
     this.document.head.appendChild(linkEl);
