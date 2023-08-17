@@ -37,6 +37,7 @@ export class AdminDashboardComponent implements OnInit{
   }
 
   handlePageEvent(event: PageEvent): void {
+    this.pageIndex = event.pageIndex;
     this.postComponentStore$.checkGlobalParams({ page: event.pageIndex + 1, per_page: event.pageSize });
   }
 

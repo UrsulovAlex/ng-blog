@@ -1,4 +1,5 @@
 import { NgIf, NgFor } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { IPostStateData } from '@shared/components/post-state/state/models/post-state';
@@ -34,11 +35,15 @@ export class WebHomeComponent implements OnInit{
   paginatorOptionsData!: Partial<IParams>;
   pageIndex = 0;
 
+  constructor(private http: HttpClient) {
+  }
+
   ngOnInit(): void {
     this.initData();
   }
 
   handlePageEvent(event: PageEvent): void {
+    this.pageIndex = event.pageIndex;
     this.postComponentStore$.checkGlobalParams({ page: event.pageIndex + 1, per_page: event.pageSize });
   }
 
@@ -55,4 +60,5 @@ export class WebHomeComponent implements OnInit{
   trackByFn(index: number, item: IPost) {
     return index;
   }
+
 }

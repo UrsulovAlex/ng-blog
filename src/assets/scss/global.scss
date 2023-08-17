@@ -11,6 +11,10 @@
     &_flex {
         display: flex;
     }
+
+    &_column {
+        flex-direction: column;
+    }
 }
 
 .full-width {

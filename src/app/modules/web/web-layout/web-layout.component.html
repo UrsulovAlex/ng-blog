@@ -1,10 +1,10 @@
 <app-web-header *ngIf="showHeader" [user]="(userInit$ | async)"></app-web-header>
 
-<main class="container_flex">
+<main class="container_flex h-100">
     <app-web-sidebar *ngIf="showSidebar" [data]="(categoryInit$ | async)"></app-web-sidebar>
     <section class="container">
         <router-outlet></router-outlet>
     </section>
 </main>
 
-<app-web-footer class="align-items_bottom"></app-web-footer>
+<app-web-footer></app-web-footer>

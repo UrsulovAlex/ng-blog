@@ -10,6 +10,11 @@ $indents-sizes: (
     "40": 40px,
 );
 
+$hight-sizes: (
+    "10": 10%,
+    "100": 100%,
+);
+
 //utility padding
 @each $name, $size in $indents-sizes {
     .p-#{$name} {
@@ -58,6 +63,13 @@ $indents-sizes: (
 @each $name, $size in $indents-sizes {
     .mb-#{$name} {
         margin-bottom: $size !important;
+    }
+}
+
+//uitility height
+@each $name, $size in $hight-sizes {
+    .h-#{$name} {
+        height: 100%;
     }
 }
 
