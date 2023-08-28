@@ -6,6 +6,7 @@ import { IPostState, IPostStateData } from './models/post-state';
 import { ComponentStore, OnStoreInit, tapResponse } from '@ngrx/component-store';
 import { IParams } from '@shared/models_config_interface/params.interface';
 import { simpleCompareObject } from '@shared/helpers/simpleCompareObject';
+import { PostService } from '@shared/services/post.service';
 
 
 const initialState: IPostStateData = {
@@ -27,7 +28,7 @@ const initialState: IPostStateData = {
 
 @Injectable()
 export class PostComponentStore extends ComponentStore<IPostStateData> implements OnStoreInit{
-    private readonly serviceLayoutService = inject(ServiceLayoutService);
+    private readonly postService = inject(PostService);
     postState$ = this.select(state => state);
     constructor() {
         super(initialState);
@@ -73,7 +74,7 @@ export class PostComponentStore extends ComponentStore<IPostStateData> implement
         switchMap((payload) => {
             const dataState = this.get(state => state.postStateData);
             if (!dataState.length) {             
-                return this.serviceLayoutService.getAllPosts(payload).pipe(
+                return this.postService.getAllPosts(payload).pipe(
                     tapResponse((data: IPostResponse) => {
                         const loadingPostStateData: IPostState[] = [{
                             data: [...data.data],
@@ -114,7 +115,7 @@ export class PostComponentStore extends ComponentStore<IPostStateData> implement
         switchMap((payload) => {
             const dataState = this.get(state => state);
 
-            return this.serviceLayoutService.getAllPosts(payload).pipe(
+            return this.postService.getAllPosts(payload).pipe(
                 tapResponse((data: IPostResponse) => {
                     const updatePostStateData: IPostState = {
                         data: data.data,

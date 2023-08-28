@@ -2,31 +2,33 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { PostResolver } from './admin-post/resolver/post.resolver';
 
 const routes: Routes = [
   { 
     path: '',
     component: AdminLayoutComponent,
-    children:[
+    children:[ 
       {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'dashboard',
-      },   
-      {
-        path:'dashboard',
+        path:'',
         component: AdminDashboardComponent,
+        title: 'dashboard',
       },
       {
-        path:'form/:namespace/:entity',
-        loadComponent: () => import('./admin-form/admin-form.component').then(c => c.AdminFormComponent),
+        path:'post/update/:id',
+        loadComponent: () => import('@modules/admin/admin-post/admin-post.component').then(c => c.AdminPostComponent),
+        resolve: {dataPost: PostResolver},
+        data: {type: 'update'},
+        title: 'update',
       },
       {
-        path:'grid/:namespace/:entity',
-        loadComponent: () => import('./admin-grid/admin-grid.component').then(c => c.AdminGridComponent),
-      },   
-    ]
-  }
+        path:'post/create',
+        loadComponent: () => import('@modules/admin/admin-post/admin-post.component').then(c => c.AdminPostComponent),
+        data: {type: 'create'},
+        title: 'create',
+      },
+    ], 
+  },
 ];
 
 @NgModule({

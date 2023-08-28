@@ -16,7 +16,7 @@ export class PostComponent implements OnInit{
   postData!: IPostSingle;
 
   ngOnInit(): void {
-    this.postData = this.activateRoute.snapshot.data['data'];
+    this.postData = this.activateRoute.snapshot.data['data'];  
   }
 
 }

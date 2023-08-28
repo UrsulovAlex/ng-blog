@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
 import { AdminAuthStoreModule } from '@shared/modules/auth/admin-auth-store/admin-auth-store.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
@@ -19,10 +18,8 @@ import { InterceptorErrorInterceptor } from '@shared/interceptors/interceptor-er
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
     AppRoutingModule,
-    BrowserModule,
-    RouterModule.forRoot([]),
+    HttpClientModule,
     BrowserAnimationsModule,
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25 }),

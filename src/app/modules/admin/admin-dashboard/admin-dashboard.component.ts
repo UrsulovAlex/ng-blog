@@ -6,12 +6,13 @@ import { PAGINATOR_PAGE_SIZE_OPTIONS } from '@shared/models_config_interface/pag
 import { IParams } from '@shared/models_config_interface/params.interface';
 import { DEFAULT_STORE_PARAMS } from '@shared/models_config_interface/post-params-store.config';
 import { DestroyService } from '@shared/services/destroy.service';
-import { takeUntil } from 'rxjs';
+import { filter, takeUntil } from 'rxjs';
 import { MatTableModule } from '@angular/material/table';
 import { DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { IPost } from '@shared/models_config_interface/post.interface';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -24,6 +25,8 @@ import { IPost } from '@shared/models_config_interface/post.interface';
 export class AdminDashboardComponent implements OnInit{
   private postComponentStore$ = inject(PostComponentStore);
   private destroyService$ = inject(DestroyService);
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
   postStateData$ = this.postComponentStore$.postState$;
   posts: IPost[] = [];
   showFirstLastButtons = true;
@@ -53,5 +56,13 @@ export class AdminDashboardComponent implements OnInit{
 
   trackByFn(index: number, item: IPost) {
     return index;
+  }
+
+  editPost(id: number): void {
+    this.router.navigate(['admin', 'post', 'update', id]);
+  }
+
+  createPost(): void {
+    this.router.navigate(['post', 'create'], {relativeTo: this.activatedRoute});
   }
 }

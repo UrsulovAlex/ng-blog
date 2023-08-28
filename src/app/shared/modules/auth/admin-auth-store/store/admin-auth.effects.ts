@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { fromEvent, timer} from 'rxjs';
-import { extractLoginData, initAdminAuth, login, loginFailed, loginSuccess, logout, logoutSuccess } from "@shared/modules/auth/admin-auth-store/store/admin-auth.actions";
+import { extractLoginData, initAdminAuth, login, loginSuccess, logout, logoutSuccess } from "@shared/modules/auth/admin-auth-store/store/admin-auth.actions";
 import { AuthData } from "@shared/modules/auth/admin-auth-store/store/admin-auth.reducer";
 import { distinctUntilChanged, filter, first, map, skip, switchMap, tap} from 'rxjs/operators';
 import { AuthService } from "@shared/modules/auth/admin-auth-store/store/services/auth.service";
@@ -9,6 +9,7 @@ import { Store, select } from "@ngrx/store";
 import { getAuthData, isAuth } from "@shared/modules/auth/admin-auth-store/store/admin-auth.selectors";
 import { Router } from "@angular/router";
 import { Roles } from "@shared/enum/roles.enum";
+import { Location } from "@angular/common";
 
 @Injectable()
 export class AdminAuthEffects {
@@ -16,7 +17,8 @@ export class AdminAuthEffects {
         private actions$: Actions,
         private authService: AuthService,
         private store$: Store,
-        private router: Router){}
+        private router: Router,
+        private location: Location){}
 
     login$ = createEffect(() => this.actions$.pipe(
         ofType(login),
@@ -85,18 +87,12 @@ export class AdminAuthEffects {
             select(getAuthData),
             filter(getAuthData => getAuthData?.role !== undefined),
             tap(isAuthorized => {
-                switch(isAuthorized!.role) {
-                    case Roles.admin: {
-                        this.router.navigate(['/admin']);
-                        break;
-                    }
-                    case Roles.user:
-                    default: {
-                        this.router.navigate(['/home']);
-                        break;
-                    }
+                const adminPath = this.location.path().split("/").includes(Roles.admin);      
+                if (!adminPath && (isAuthorized!.role === Roles.admin)) {
+                    this.router.navigate(['/admin']);
+                } else if (isAuthorized!.role !== Roles.user) {
+                    logoutSuccess();
                 }
-                logoutSuccess();
             })
         ), 
     )),{dispatch: false});

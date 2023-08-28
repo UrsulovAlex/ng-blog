@@ -1,12 +1,13 @@
 import { createReducer, on } from "@ngrx/store";
 import { login, loginFailed, loginSuccess,logoutSuccess } from "./admin-auth.actions";
+import { roleAuthData } from "./config";
 
 export const ADMIN_AUTH_FEATURE_NAME = 'admin-auth';
 
 export interface AuthData {
   accessToken: string;
   id: number;
-  role: string;
+  role: roleAuthData;
   iat: number;
   exp: number;
 }

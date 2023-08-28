@@ -7,3 +7,5 @@ export enum AdminAuthActionType {
     logoutSuccess = '[Admin Auth] logout success',
     extractLoginData = '[Admin Auth] extract login data',
 }
+
+export type roleAuthData = 'admin' | 'user';

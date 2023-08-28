@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminGridComponent } from './admin-grid.component';
+import { AdminPostComponent } from './admin-post.component';
 
-describe('AdminGridComponent', () => {
-  let component: AdminGridComponent;
-  let fixture: ComponentFixture<AdminGridComponent>;
+describe('AdminPostComponent', () => {
+  let component: AdminPostComponent;
+  let fixture: ComponentFixture<AdminPostComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminGridComponent ]
+      imports: [ AdminPostComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AdminGridComponent);
+    fixture = TestBed.createComponent(AdminPostComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

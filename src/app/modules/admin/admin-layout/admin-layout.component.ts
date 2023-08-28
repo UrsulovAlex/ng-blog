@@ -5,7 +5,7 @@ import { AdminFooterComponent } from "@view-ui/admin-footer/admin-footer.compone
 import { AdminHeaderComponent } from "@view-ui/admin-header/admin-header.component";
 import { AdminNavBlockComponent } from "@view-ui/admin-nav-block/admin-nav-block.component";
 import { INestedTreeNodes } from '@view-ui/admin-nav-block/models/nested-tree-node';
-import { Observable, of } from 'rxjs';
+import { Observable, filter, of } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { initMenu } from '../store/admin-menu-store/store/admin-menu.actions';
 import { getMenuData } from '../store/admin-menu-store/store/admin-menu.selectors';
