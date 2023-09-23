@@ -1,0 +1,15 @@
+<p class="mb-4">{{label}}</p>
+<mat-form-field class="full-width">
+    <mat-label>{{label}}</mat-label>
+    <mat-select 
+        [value]="control.value"
+        (selectionChange)="setValue($event)"
+        [formControl]="control"
+        >
+        <ng-container *ngFor="let item of value">
+            <ng-container *ngIf="!CURRENT_TYPE_ENUM.Default">
+                <mat-option [value]="item?.id">{{item?.title}}</mat-option>
+            </ng-container>
+        </ng-container>
+    </mat-select>
+</mat-form-field>

@@ -6,13 +6,15 @@ import { PAGINATOR_PAGE_SIZE_OPTIONS } from '@shared/models_config_interface/pag
 import { IParams } from '@shared/models_config_interface/params.interface';
 import { DEFAULT_STORE_PARAMS } from '@shared/models_config_interface/post-params-store.config';
 import { DestroyService } from '@shared/services/destroy.service';
-import { filter, takeUntil } from 'rxjs';
+import { filter, take, takeUntil } from 'rxjs';
 import { MatTableModule } from '@angular/material/table';
 import { DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { IPost } from '@shared/models_config_interface/post.interface';
-import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PostService } from '@shared/services/post.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -27,6 +29,8 @@ export class AdminDashboardComponent implements OnInit{
   private destroyService$ = inject(DestroyService);
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
+  private postService = inject(PostService);
+  private snackBar = inject(MatSnackBar);
   postStateData$ = this.postComponentStore$.postState$;
   posts: IPost[] = [];
   showFirstLastButtons = true;
@@ -51,6 +55,7 @@ export class AdminDashboardComponent implements OnInit{
     ).subscribe((data: IPostStateData) => {
       this.paginatorOptionsData = data.currentParams;
       this.posts = data.postStateData[data.currentDataIndex]?.data;
+      
     });
   }
 
@@ -59,10 +64,16 @@ export class AdminDashboardComponent implements OnInit{
   }
 
   editPost(id: number): void {
-    this.router.navigate(['admin', 'post', 'update', id]);
+    this.router.navigate(['post', 'update', id], {relativeTo: this.activatedRoute});
   }
 
   createPost(): void {
     this.router.navigate(['post', 'create'], {relativeTo: this.activatedRoute});
+  }
+
+  removePost(id: number): void {
+    this.postService.removePost(id).pipe(
+      take(1)
+    ).subscribe( _data => this.snackBar.open('postDilated', 'close', {duration: 5000}));
   }
 }

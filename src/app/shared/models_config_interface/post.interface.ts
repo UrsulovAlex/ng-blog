@@ -5,7 +5,7 @@ export interface IPost {
     id: number;
     author: Partial<IUser>;
     createdAt: string;
-    nameCategory: ICategory,
+    nameCategory: ICategory;
     text: string;
     title: string;
     updatedAt: string,
@@ -32,10 +32,17 @@ export interface IPostSingle {
 }
 
 export interface IPostComments {
-    createdAt: string,
-    id: number
-    message: string,
-    postId: number,
-    updatedAt: string,
-    userId: number
+    createdAt: string;
+    id: number;
+    message: string;
+    postId: number;
+    updatedAt: string;
+    userId: number;
+}
+
+export interface IManipulatePost {
+    title: string;
+    text: string;
+    authorPostsId: IPostSingle['author']['id'];
+    categoryId: IPostSingle['nameCategory']['id'];
 }

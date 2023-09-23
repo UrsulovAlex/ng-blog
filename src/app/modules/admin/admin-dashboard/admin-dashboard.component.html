@@ -1,3 +1,10 @@
+<section class="mb-16 container_flex align-flex_r">
+    <button mat-raised-button  color="primary" (click)="createPost()">
+        <mat-icon class="icon">post_add</mat-icon>
+        Add post
+    </button>
+</section>
+
 <section class="mat-elevation-z8">
     <table mat-table [dataSource]="posts" [trackBy]="trackByFn">
         <ng-container matColumnDef="Title">
@@ -31,7 +38,7 @@
                 <button (click) = "editPost(element.id)" mat-icon-button color="accent">
                     <mat-icon>edit</mat-icon>
                 </button>
-                <button (click) = "createPost()" mat-icon-button color="warn">
+                <button (click) = "removePost(element.id)" mat-icon-button color="warn">
                     <mat-icon>delete</mat-icon>
                 </button>     
             </td>

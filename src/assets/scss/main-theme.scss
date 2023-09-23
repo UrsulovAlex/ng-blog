@@ -85,6 +85,7 @@ $my-app-theme: mat.define-light-theme(
 @include mat.list-theme($my-app-theme);
 @include mat.table-theme($my-app-theme);
 @include mat.form-field-theme($my-app-theme);
+@include mat.select-theme($my-app-theme);
 
   
   

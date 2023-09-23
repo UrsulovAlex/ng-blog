@@ -1,22 +1,22 @@
-import { ChangeDetectionStrategy, Component, Input,} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { NgIf } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'app-input-form',
+  selector: 'app-textarea',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, NgIf],
-  templateUrl: './input-form.component.html',
-  styleUrls: ['./input-form.component.scss'],
+  imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule,],
+  templateUrl: './textarea.component.html',
+  styleUrls: ['./textarea.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputFormComponent {
+export class TextareaComponent {
   @Input() control!: FormControl;
   @Input() label: string = '';
-  @Input() type: string = 'text';
   @Input() placeholder: string = '';
+  @Input() minRows: number = 1;
+  @Input() maxRows: number = 5;
   @Input() required: boolean = false;
   @Input() readonly: boolean = false;
 

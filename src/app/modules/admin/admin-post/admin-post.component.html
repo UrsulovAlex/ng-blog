@@ -1,1 +1,36 @@
-<p>admin-post works!</p>
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>{{this.commponentType}}</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+        <mat-card-content>
+            <app-input-form
+                label="Title"
+                type="text"
+                placeholder="Login"
+                [control] = "$any(formGroup.get('title'))"
+            >
+            </app-input-form>
+            <app-select
+                label="Category"
+                [control] = "$any(formGroup.get('nameCategory'))"
+                [value] = "$any(categoryInit$ | async)"
+                >
+            </app-select>
+            <app-textarea
+                label="Post Text"
+                placeholder="Post Text"
+                [minRows]="5"
+                [maxRows]="24"
+                [control] = "$any(formGroup.get('text'))"
+            ></app-textarea>
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <button mat-raised-button 
+                type="submit" 
+                color="primary"
+                [disabled]="formGroup.invalid || !disabledButton">
+                    {{this.commponentType | uppercase}}</button>
+        </mat-card-actions>
+    </form>
+  </mat-card>

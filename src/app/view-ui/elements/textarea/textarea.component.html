@@ -1,0 +1,12 @@
+<p class="mb-4">{{label}}</p>
+<mat-form-field class="full-width">
+    <mat-label>{{label}}</mat-label>
+    <textarea matInput
+        [formControl]="control"
+        [placeholder]="placeholder"
+        [required]="required"
+        [readonly]="readonly"
+        cdkTextareaAutosize
+        [cdkAutosizeMinRows]="minRows"
+        [cdkAutosizeMaxRows]="maxRows"></textarea>
+</mat-form-field>

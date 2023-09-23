@@ -27,4 +27,5 @@ $my-app-dark-theme: mat.define-dark-theme(
   @include mat.list-theme($my-app-dark-theme);
   @include mat.table-theme($my-app-dark-theme);
   @include mat.form-field-theme($my-app-dark-theme);
+  @include mat.select-theme($my-app-dark-theme);
 }
