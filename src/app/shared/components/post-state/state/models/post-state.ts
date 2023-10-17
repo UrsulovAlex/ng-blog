@@ -1,5 +1,5 @@
 import { IParams } from "@shared/models_config_interface/params.interface";
-import { IPost, IPostResponse } from "@shared/models_config_interface/post.interface";
+import { IPost, IPostResponse, IPostSingle } from "@shared/models_config_interface/post.interface";
 
 export interface IPostState {
     data: IPost[];

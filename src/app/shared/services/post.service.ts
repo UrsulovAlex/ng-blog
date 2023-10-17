@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { validateQueryParams } from '@shared/helpers/validateQueryParams';
 import { IParams } from '@shared/models_config_interface/params.interface';
 import { IPostResponse, IPostSingle, IManipulatePost } from '@shared/models_config_interface/post.interface';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

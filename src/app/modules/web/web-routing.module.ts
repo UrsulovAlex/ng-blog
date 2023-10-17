@@ -13,12 +13,12 @@ const routes: Routes = [
       {
         path: 'login',
         loadComponent: () => import('./admin-auth/admin-auth.component').then(c => c.AdminAuthComponent),
-        data: { showHeader: false, showSidebar: false },
+        data: { showHeader: false, showSidebar: false, register: false },
       },
       {
         path: 'register',
         loadComponent: () => import('./admin-auth/admin-auth.component').then(c => c.AdminAuthComponent),
-        data: { showHeader: false, showSidebar: false },
+        data: { showHeader: false, showSidebar: false, register: true },
       },
       {
         path: 'home',

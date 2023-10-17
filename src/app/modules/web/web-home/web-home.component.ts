@@ -7,7 +7,7 @@ import { PostComponentStore } from '@shared/components/post-state/state/post-com
 import { PAGINATOR_PAGE_SIZE_OPTIONS } from '@shared/models_config_interface/pagination.interface';
 import { IParams } from '@shared/models_config_interface/params.interface';
 import { DEFAULT_STORE_PARAMS } from '@shared/models_config_interface/post-params-store.config';
-import { IPost } from '@shared/models_config_interface/post.interface';
+import { IPost} from '@shared/models_config_interface/post.interface';
 import { DestroyService } from '@shared/services/destroy.service';
 import { PostListComponent } from '@view-ui/post-list/post-list.component';
 import { takeUntil } from 'rxjs';
@@ -54,6 +54,7 @@ export class WebHomeComponent implements OnInit{
     ).subscribe((data: IPostStateData) => {
       this.paginatorOptionsData = data.currentParams;
       this.posts = data.postStateData[data.currentDataIndex]?.data;
+      console.log('data.postStateData[data.currentDataIndex]', data.postStateData[data.currentDataIndex]?.data);
     });
   }
 

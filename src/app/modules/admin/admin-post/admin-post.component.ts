@@ -11,12 +11,13 @@ import { TextareaComponent } from '@view-ui/elements/textarea/textarea.component
 import { Store, select } from '@ngrx/store';
 import { ICategory } from '@shared/models_config_interface/category.interface';
 import { getCategoryData } from '@modules/web/web-layout/store/category-store/category.selectors';
-import { Observable, catchError, debounceTime, distinctUntilChanged, take, takeUntil } from 'rxjs';
+import { Observable, catchError, debounceTime, distinctUntilChanged, take, takeUntil, tap } from 'rxjs';
 import { SelectComponent } from '@view-ui/elements/select/select.component';
 import { PostService } from '@shared/services/post.service';
 import { DestroyService } from '@shared/services/destroy.service';
 import { getAuthData } from '@shared/modules/auth/admin-auth-store/store/admin-auth.selectors';
 import { AuthData } from '@shared/modules/auth/admin-auth-store/store/admin-auth.reducer';
+import { PostComponentStore } from '@shared/components/post-state/state/post-component-store';
 
 @Component({
     selector: 'app-admin-post',
@@ -32,6 +33,7 @@ export class AdminPostComponent {
   private store$ = inject(Store);  
   private destroyService$ = inject(DestroyService);
   private postService = inject(PostService);
+  private postComponentStore$ = inject(PostComponentStore);
   private userId$: Observable<AuthData | null> = this.store$.pipe(
     select(getAuthData)
   );
@@ -97,6 +99,13 @@ export class AdminPostComponent {
       }
       if (this.commponentType === 'update') {
         this.postService.updatePost(this.postData.id, payload).pipe(
+          tap( () => {
+            const upadatePostState: IPostSingle = {
+              ...this.postData,
+              ...payload
+            }
+            this.postComponentStore$.updatePostState(upadatePostState);
+          }),
           take(1)
         ).subscribe( data =>  {
           this.postData = data;

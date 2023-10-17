@@ -11,7 +11,7 @@ import { MatTableModule } from '@angular/material/table';
 import { DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { IPost } from '@shared/models_config_interface/post.interface';
+import { IPost, IPostSingle } from '@shared/models_config_interface/post.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from '@shared/services/post.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -55,7 +55,6 @@ export class AdminDashboardComponent implements OnInit{
     ).subscribe((data: IPostStateData) => {
       this.paginatorOptionsData = data.currentParams;
       this.posts = data.postStateData[data.currentDataIndex]?.data;
-      
     });
   }
 

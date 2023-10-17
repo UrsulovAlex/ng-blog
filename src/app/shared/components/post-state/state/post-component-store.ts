@@ -1,5 +1,4 @@
-import { IPostResponse } from '@shared/models_config_interface/post.interface';
-import { ServiceLayoutService } from '../../../../modules/web/web-layout/store/services/service-layout.service';
+import { IPost, IPostResponse, IPostSingle } from '@shared/models_config_interface/post.interface';
 import { Injectable, inject } from '@angular/core';
 import { EMPTY, Observable, of, switchMap, tap } from 'rxjs';
 import { IPostState, IPostStateData } from './models/post-state';
@@ -69,6 +68,17 @@ export class PostComponentStore extends ComponentStore<IPostStateData> implement
         loading: false,
         loaded: true, 
     }));
+
+    updatePostState = this.updater(((state: IPostStateData, post: IPostSingle) => ({
+        ...state,
+        ...state.postStateData.map( (item) => {
+            item.data.some( item =>  {
+                if(item.id === post.id) {
+                    item = Object.assign(item, post);
+                }
+            }) 
+        })
+    })));
 
     getPosts$ = this.effect((params$: Observable<Partial<IParams>>) => params$.pipe(
         switchMap((payload) => {

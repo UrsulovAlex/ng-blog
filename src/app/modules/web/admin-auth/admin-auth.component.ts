@@ -17,7 +17,7 @@ import { ActivatedRoute } from '@angular/router';
   imports: [CommonModule, ReactiveFormsModule, InputFormComponent, MatButtonModule, MatCardModule],
   templateUrl: './admin-auth.component.html',
   styleUrls: ['./admin-auth.component.scss'],
-  providers: [DestroyService,],
+  providers: [DestroyService],
 })
 export class AdminAuthComponent implements OnInit{
   private store$ = inject(Store);
@@ -32,19 +32,22 @@ export class AdminAuthComponent implements OnInit{
   register = false;
 
   ngOnInit(): void {
+    this.initFormTamplate(this.router.snapshot.routeConfig?.data?.['register']);
     this.initRegisterForms();
   }
 
-  initRegisterForms(): void {
-    this.router.snapshot.routeConfig?.path === 'login' ? this.register = false : this.register = true;
+  initFormTamplate(checkRegister: boolean ): boolean {
+    this.title = checkRegister ? 'Log in' : 'Sign up';
+    return this.register = checkRegister;
+  }
 
+  initRegisterForms(): void {
     this.formGroup = this.formBuilder.group({
       login: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(3)]],
     });
 
-    if (this.register) {
-      this.title = 'Sign up';
+    if (!this.register) {
       this.formGroup.addControl('nickName', new FormControl('', [Validators.required, Validators.minLength(3)]));
     } else {
       this.formGroup.removeControl('nickName');
