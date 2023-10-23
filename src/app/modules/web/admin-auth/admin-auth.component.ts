@@ -26,13 +26,13 @@ export class AdminAuthComponent implements OnInit{
   serverError$: Observable<string> = this.store$.pipe(select(adminAuth.getServerError));
   private formBuilder = inject(FormBuilder);
   private destroyService$ = inject(DestroyService);
-  private router = inject(ActivatedRoute)
+  router = inject(ActivatedRoute)
   formGroup!:FormGroup;
   title = 'Log in';
   register = false;
 
   ngOnInit(): void {
-    this.initFormTamplate(this.router.snapshot.routeConfig?.data?.['register']);
+    this.initFormTamplate(this.router.snapshot.data['register']);
     this.initRegisterForms();
   }
 
@@ -49,8 +49,6 @@ export class AdminAuthComponent implements OnInit{
 
     if (!this.register) {
       this.formGroup.addControl('nickName', new FormControl('', [Validators.required, Validators.minLength(3)]));
-    } else {
-      this.formGroup.removeControl('nickName');
     }
   }
 

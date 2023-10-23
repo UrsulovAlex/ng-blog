@@ -2,6 +2,7 @@
     <mat-card-content>
         <h2>{{title}}</h2>
         <form [formGroup]="formGroup"
+            id="login-form"
             class="login-form"
             (ngSubmit)="onSubmit()">
             <app-input-form
@@ -21,7 +22,7 @@
                 >
             </app-input-form>
             <app-input-form
-                *ngIf="register"
+                *ngIf="!register"
                 label="NickName"
                 type="text"
                 placeholder="nickName"
@@ -31,6 +32,7 @@
         </app-input-form>
             <div class="mt-16">
                 <button mat-raised-button 
+                    id="button"
                     type="submit" 
                     color="primary"
                     class="align-items_x_center"
