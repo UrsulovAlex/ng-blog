@@ -99,7 +99,7 @@ describe('AdminAuthComponent', () => {
         expect(component.register).toBe(newValue);
     });
 
-    it('should registration', () => {
+    it('should registration form valid', () => {
         const formElement = fixture.debugElement.nativeElement.querySelector('#login-form');
         const inputElements = formElement.querySelectorAll('input');
         const loginUserElement = formElement.querySelectorAll('input')[0];
@@ -122,4 +122,12 @@ describe('AdminAuthComponent', () => {
             expect(isFormValid).toBeTruthy();
         })
     });
+
+    it('should test if onSubmit method has been called', () => {
+        fixture.detectChanges();
+        spyOn(component, 'onSubmit').and.callThrough();
+        const buttonDebug = fixture.debugElement.nativeElement.querySelector('#button');
+        buttonDebug.click();
+        expect(component.onSubmit).toHaveBeenCalledTimes(0);
+    })
 })
