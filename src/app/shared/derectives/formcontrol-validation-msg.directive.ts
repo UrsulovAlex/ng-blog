@@ -2,13 +2,16 @@ import { Directive, EventEmitter, Input, OnInit, Output, inject } from '@angular
 import { AbstractControl, FormControlStatus } from '@angular/forms';
 import { ENUM_FORM_GROUP } from '@shared/enum/formGroup.enem';
 import { getValidationErrors } from '@shared/helpers/getValidationErrors';
-import { EMPTY, debounceTime, of, switchMap } from 'rxjs';
+import { DestroyService } from '@shared/services/destroy.service';
+import { EMPTY, debounceTime, of, switchMap, takeUntil } from 'rxjs';
 
 @Directive({
   selector: '[appFormcontrolValidationMsg]',
   standalone: true,
+  providers: [DestroyService],
 })
 export class FormcontrolValidationMsgDirective implements OnInit{
+  private destroyService$ = inject(DestroyService);
   @Input() currentControl!: AbstractControl;
   @Input() currentFormGroup: ENUM_FORM_GROUP = ENUM_FORM_GROUP.login_register;
   @Input() currentControlName: string = '';
@@ -25,13 +28,12 @@ export class FormcontrolValidationMsgDirective implements OnInit{
 
         return of(status);
       }),
+      takeUntil(this.destroyService$),
     ).subscribe((status: FormControlStatus) => {
         if (status === 'INVALID') {
           this.showErrors.emit(getValidationErrors(this.currentControl, this.currentFormGroup, this.currentControlName));
-          console.log('INVALID', );
         } else {
           this.showErrors.emit(getValidationErrors(this.currentControl));
-          console.log('VALID', );
         }
       }
     )
