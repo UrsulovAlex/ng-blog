@@ -1,6 +1,4 @@
-interface IBaseObject {
-  [key: string]: any;
-}
+import { IBaseObject } from "@shared/models_config_interface/baseObject.interface";
 
 export function simpleCompareObject(object1: IBaseObject,  object2: IBaseObject ): boolean {
     const keys1 = Object.keys(object1);

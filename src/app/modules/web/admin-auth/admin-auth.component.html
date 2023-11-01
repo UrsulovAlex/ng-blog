@@ -1,35 +1,44 @@
 <mat-card class="login align-items_x_center align-items_y_center">
     <mat-card-content>
-        <h2>{{title}}</h2>
+        <h2 class="test">{{title}}</h2>
         <form [formGroup]="formGroup"
             id="login-form"
             class="login-form"
             (ngSubmit)="onSubmit()">
             <app-input-form
                 label="Login"
-                type="text"
+                inputProperty="text"
                 placeholder="Login"
                 [control] = "$any(formGroup.get('login'))"
+                currentControlName = "login"
+                currentControl="$any(formGroup.get('login'))"
+                [typeOfFormGroup]="currentFormGroup"
                 class="login__input-control"
                 >
             </app-input-form>
             <app-input-form
                 label="Пароль"
-                type="password"
+                inputProperty="password"
                 placeholder="Password"
                 [control] = "$any(formGroup.get('password'))"
+                currentControlName = "password"
+                currentControl="$any(formGroup.get('password'))"
+                [typeOfFormGroup]="currentFormGroup"
                 class="login__input-control"
                 >
             </app-input-form>
             <app-input-form
                 *ngIf="!register"
                 label="NickName"
-                type="text"
+                inputProperty="text"
                 placeholder="nickName"
                 [control] = "$any(formGroup.get('nickName'))"
+                currentControlName = "nickName"
+                currentControl="$any(formGroup.get('nickName'))"
+                [typeOfFormGroup]="currentFormGroup"
                 class="login__input-control"
             >
-        </app-input-form>
+            </app-input-form>
             <div class="mt-16">
                 <button mat-raised-button 
                     id="button"
@@ -39,5 +48,6 @@
                     [disabled]="formGroup.invalid">{{title}}</button>
             </div>
         </form>
+        <p>Don't have an account Sign Up</p>
     </mat-card-content>
 </mat-card>

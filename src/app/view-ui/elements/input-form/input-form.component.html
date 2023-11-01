@@ -1,22 +1,21 @@
 <p class="mb-4">{{label}}</p>
-<mat-form-field class="full-width">
+<mat-form-field class="full-width" >
     <mat-label>{{label}}</mat-label>
     <input
         matInput
         [formControl]="control"
-        [type]="type"
+        [type]="inputProperty"
         [placeholder]="placeholder"
         [required]="required"
         [readonly]="readonly"
+        appFormcontrolValidationMsg
+        [currentControl]="(control)"
+        [currentControlName]="currentControlName"
+        (showErrors) = "showError($event)"
     />
-    <mat-error *ngIf="displayErrors()">
-        <mat-hint *ngIf="control.errors?.['required']">This value is required</mat-hint>
-    
-        <mat-hint *ngIf="control.errors?.['minlength']">
-          This value has {{ control.errors?.['minlength']?.['actualLength'] }} but must be
-          at least {{ control.errors?.['minlength']?.['requiredLength'] }}
-        </mat-hint>
-    </mat-error>
 </mat-form-field>
-
-
+<ng-container *ngIf="errorMessages?.length">
+    <mat-error class="mb-4" 
+        *ngFor="let errorMsg of errorMessages; let index = index; let last = last" [ngClass]="{'mb-8': last}">
+            {{errorMsg}}</mat-error>
+</ng-container>

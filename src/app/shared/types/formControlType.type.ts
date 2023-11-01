@@ -1,0 +1,1 @@
+export type FormTypeControl = 'login' | 'password' | 'nickName';

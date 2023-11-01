@@ -1,13 +1,17 @@
-import { ChangeDetectionStrategy, Component, Input,} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { NgIf } from '@angular/common';
+import { MatError, MatFormFieldModule } from '@angular/material/form-field';
+import { NgClass, NgFor, NgIf } from '@angular/common';
+import { InputType } from '@shared/types/inputType.type';
+import { FormcontrolValidationMsgDirective } from '@shared/derectives/formcontrol-validation-msg.directive';
+import { ENUM_FORM_GROUP } from '@shared/enum/formGroup.enem';
+import { FormTypeControl } from '@shared/types/formControlType.type';
 
 @Component({
   selector: 'app-input-form',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, NgIf],
+  imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, NgIf, NgFor, NgClass, FormcontrolValidationMsgDirective], 
   templateUrl: './input-form.component.html',
   styleUrls: ['./input-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,13 +19,15 @@ import { NgIf } from '@angular/common';
 export class InputFormComponent {
   @Input() control!: FormControl;
   @Input() label: string = '';
-  @Input() type: string = 'text';
+  @Input() inputProperty: InputType = 'text';
   @Input() placeholder: string = '';
   @Input() required: boolean = false;
   @Input() readonly: boolean = false;
+  @Input() typeOfFormGroup: ENUM_FORM_GROUP = ENUM_FORM_GROUP.login_register;
+  @Input() currentControlName: FormTypeControl = 'login';
+  errorMessages: string[] | null = [];
 
-  displayErrors() {
-    const { dirty, touched, errors } = this.control;
-    return dirty && touched && errors;
+  showError(event: string[] | null): void {
+    this.errorMessages = event;
   }
 }
