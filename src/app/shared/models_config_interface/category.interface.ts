@@ -1,6 +1,7 @@
 export interface ICategory {
     id: number,
     title: string;
+    categoryPostsCount: number;
 }
 
 export interface ICategoryState {

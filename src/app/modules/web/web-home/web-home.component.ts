@@ -54,7 +54,6 @@ export class WebHomeComponent implements OnInit{
     ).subscribe((data: IPostStateData) => {
       this.paginatorOptionsData = data.currentParams;
       this.posts = data.postStateData[data.currentDataIndex]?.data;
-      console.log('data.postStateData[data.currentDataIndex]', data.postStateData[data.currentDataIndex]?.data);
     });
   }
 

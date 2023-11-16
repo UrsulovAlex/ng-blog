@@ -2,8 +2,17 @@
   <mat-list>
       <div mat-subheader>Categories</div>
       <mat-list-item *ngFor="let item of data">
-        <mat-icon matBadge="15" matBadgeColor="primary" matListItemIcon>description</mat-icon>
-        <div matListItemTitle>{{item.title}}</div>
+        <p  class="container_flex align-flex_c">
+          <mat-icon>description</mat-icon>
+            {{item.title}}
+            <span           
+              class="display-block ml-20"
+              matBadge="{{item.categoryPostsCount}}" 
+              matBadgeColor="warn" 
+              matBadgeOverlap="false"
+              matBadgePosition="above before"
+              [matBadgeHidden]="item.categoryPostsCount === 0"></span> 
+          </p>
       </mat-list-item>
   </mat-list>
 </nav>
