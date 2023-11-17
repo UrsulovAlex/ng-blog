@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { InterceptorErrorInterceptor } from '@shared/interceptors/interceptor-error.interceptor';
 import { FormcontrolValidationMsgDirective } from '@shared/derectives/formcontrol-validation-msg.directive';
+import { LoadingInterceptor } from '@shared/interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,11 @@ import { FormcontrolValidationMsgDirective } from '@shared/derectives/formcontro
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: InterceptorErrorInterceptor,
+    multi: true,
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: LoadingInterceptor,
     multi: true,
   }],
   bootstrap: [AppComponent]

@@ -28,6 +28,8 @@ import { getCategoryData } from '@modules/web/web-layout/store/category-store/ca
 import { PostComponentStore } from '@shared/components/post-state/state/post-component-store';
 import { PageEvent } from '@angular/material/paginator';
 import { DestroyService } from '@shared/services/destroy.service';
+import { LoadingComponent } from '@shared/components/loading/loading.component';
+import { LoadingService } from '@shared/services/loading.service';
 
 @Component({
   selector: 'app-web-layout',
@@ -44,6 +46,7 @@ import { DestroyService } from '@shared/services/destroy.service';
     NgFor,
     PostListComponent,
     NgClass,
+    LoadingComponent,
   ],
   providers: [DestroyService]
 })
@@ -54,6 +57,7 @@ export class WebLayoutComponent implements OnInit {
   private serviceLayoutService = inject(ServiceLayoutService);
   private postComponentStore$ = inject(PostComponentStore);
   private destroyService$ = inject(DestroyService);
+  loadingService = inject(LoadingService);
   showHeader = false;
   showSidebar = false;
   userInit$: Observable<AuthData | null> = this.store$.pipe(

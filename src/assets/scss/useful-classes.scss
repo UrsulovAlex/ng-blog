@@ -114,3 +114,9 @@ $hight-sizes: (
 .display-block {
     display: block;
 }
+
+.position {
+    &_relative {
+        position: relative;
+    }
+}

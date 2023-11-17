@@ -3,10 +3,11 @@
     <ng-container *ngIf="(menuDate$ | async) as loadNodes">
         <app-admin-nav-block [nodes]="loadNodes" class="nav"></app-admin-nav-block>
     </ng-container>
-    <main class="main">
+    <main class="main position_relative">
       <section class="p-16">
         <router-outlet></router-outlet>
       </section>
+      <app-loading *ngIf="(loadingService.isLoading$) | async"></app-loading>
     </main>
     <app-admin-footer class="footer"></app-admin-footer>
 </div>
