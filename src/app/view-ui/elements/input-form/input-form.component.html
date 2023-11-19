@@ -1,6 +1,5 @@
-<p class="mb-4">{{label}}</p>
+<mat-label>{{label}}</mat-label>
 <mat-form-field class="full-width" >
-    <mat-label>{{label}}</mat-label>
     <input
         matInput
         [formControl]="control"
@@ -11,11 +10,13 @@
         appFormcontrolValidationMsg
         [currentControl]="(control)"
         [currentControlName]="currentControlName"
+        [currentFormGroup] = "typeOfFormGroup"
         (showErrors) = "showError($event)"
     />
 </mat-form-field>
 <ng-container *ngIf="errorMessages?.length">
     <mat-error class="mb-4" 
-        *ngFor="let errorMsg of errorMessages; let index = index; let last = last" [ngClass]="{'mb-8': last}">
+        *ngFor="let errorMsg of errorMessages; let index = index; let last = last" 
+        [ngClass]="{'mb-8': last}">
             {{errorMsg}}</mat-error>
 </ng-container>

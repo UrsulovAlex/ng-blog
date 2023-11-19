@@ -15,17 +15,17 @@ export enum CURRENT_TYPE_ENUM {
 }
 
 
-export function checkTypeOfdata(info: SelectType): CURRENT_TYPE_ENUM {
-    if(isCategory(info as ICategory)) return CURRENT_TYPE_ENUM.ICategory;
-    if(isPost(info as IPost)) return CURRENT_TYPE_ENUM.IPost;
-    return CURRENT_TYPE_ENUM.Default;
-}
+// export function checkTypeOfdata(info: SelectType): CURRENT_TYPE_ENUM {
+//     if(isCategory(info as ICategory)) return CURRENT_TYPE_ENUM.ICategory;
+//     if(isPost(info as IPost)) return CURRENT_TYPE_ENUM.IPost;
+//     return CURRENT_TYPE_ENUM.Default;
+// }
 
 
-function isCategory(item: ICategory): boolean {
-    return (item as ICategory).title !== undefined && Object.keys(item).length === 2;
-}
+// function isCategory(item: ICategory): boolean {
+//     return (item as ICategory).title !== undefined && Object.keys(item).length === 2;
+// }
 
-function isPost(item: IPost): boolean {
-    return (item as IPost).nameCategory !== undefined;
-}
+// function isPost(item: IPost): boolean {
+//     return (item as IPost).nameCategory !== undefined;
+// }

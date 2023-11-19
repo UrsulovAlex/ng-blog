@@ -16,6 +16,5 @@ export function getValidationErrors(control: AbstractControl, formGroup?: ENUM_F
         currentErrorMessage.push(currentFormGroup[currentControl][key]);
     }
   }
-
   return currentErrorMessage;
 }

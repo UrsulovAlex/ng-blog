@@ -6,23 +6,30 @@
         <mat-card-content>
             <app-input-form
                 label="Title"
-                type="text"
-                placeholder="Login"
+                inputProperty="text"
+                placeholder="title"
                 [control] = "$any(formGroup.get('title'))"
+                currentControlName = "title"
+                [typeOfFormGroup]="currentFormGroup"
             >
             </app-input-form>
             <app-select
                 label="Category"
+                placeholder="Category"
                 [control] = "$any(formGroup.get('nameCategory'))"
                 [value] = "$any(categoryInit$ | async)"
+                currentControlName = "nameCategory"
+                [typeOfFormGroup]="currentFormGroup"
                 >
             </app-select>
             <app-textarea
                 label="Post Text"
                 placeholder="Post Text"
                 [minRows]="5"
-                [maxRows]="24"
+                [maxRows]="350"
                 [control] = "$any(formGroup.get('text'))"
+                currentControlName = "text"
+                [typeOfFormGroup]="currentFormGroup"
             ></app-textarea>
         </mat-card-content>
         <mat-card-actions align="end">

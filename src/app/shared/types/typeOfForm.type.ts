@@ -1,1 +1,1 @@
-export type TypeOfFormGroup = 'login-register' | 'post-edit';
+export type TypeOfFormGroup = 'login_register' | 'post_edit_create';

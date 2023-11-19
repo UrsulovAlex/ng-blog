@@ -30,7 +30,6 @@ export class AdminAuthComponent implements OnInit{
   formGroup!:FormGroup;
   title = 'Log in';
   register = false;
-  displayMessage: { [key: string]: string } = {};
   currentFormGroup: ENUM_FORM_GROUP = ENUM_FORM_GROUP.login_register;
 
   ngOnInit(): void {

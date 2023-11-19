@@ -1,15 +1,27 @@
-<p class="mb-4">{{label}}</p>
+<mat-label>{{label}}</mat-label>
 <mat-form-field class="full-width">
-    <mat-label>{{label}}</mat-label>
     <mat-select 
         [value]="control.value"
         (selectionChange)="setValue($event)"
         [formControl]="control"
+        [placeholder]="placeholder"
+        [required]="required"
+        appFormcontrolValidationMsg
+        [currentControl]="(control)"
+        [currentControlName]="currentControlName"
+        [currentFormGroup] = "typeOfFormGroup"
+        (showErrors) = "showError($event)"
         >
         <ng-container *ngFor="let item of value">
-            <ng-container *ngIf="!CURRENT_TYPE_ENUM.Default">
-                <mat-option [value]="item?.id">{{item?.title}}</mat-option>
-            </ng-container>
+            <!-- <ng-container *ngIf="!CURRENT_TYPE_ENUM.Default">  TODO-->
+            <mat-option [value]="item?.id">{{item?.title}}</mat-option>
+            <!-- </ng-container> -->
         </ng-container>
     </mat-select>
 </mat-form-field>
+<ng-container *ngIf="errorMessages?.length">
+    <mat-error class="mb-4" 
+        *ngFor="let errorMsg of errorMessages; let index = index; let last = last" 
+        [ngClass]="{'mb-8': last}">
+            {{errorMsg}}</mat-error>
+</ng-container>

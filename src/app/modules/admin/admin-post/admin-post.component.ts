@@ -18,6 +18,7 @@ import { DestroyService } from '@shared/services/destroy.service';
 import { getAuthData } from '@shared/modules/auth/admin-auth-store/store/admin-auth.selectors';
 import { AuthData } from '@shared/modules/auth/admin-auth-store/store/admin-auth.reducer';
 import { PostComponentStore } from '@shared/components/post-state/state/post-component-store';
+import { ENUM_FORM_GROUP } from '@shared/enum/formGroup.enem';
 
 @Component({
     selector: 'app-admin-post',
@@ -45,6 +46,7 @@ export class AdminPostComponent {
     select(getCategoryData)
   );
   disabledButton = false;
+  currentFormGroup: ENUM_FORM_GROUP = ENUM_FORM_GROUP.post_edit;
 
   ngOnInit(): void {
     this.initData();
@@ -67,8 +69,8 @@ export class AdminPostComponent {
   initForm(): void {
     this.formGroup = this.formBuilder.group({
       nameCategory: [ null, [Validators.required]],
-      title: [ null, [Validators.required]],
-      text: [ null, [Validators.required]],
+      title: [ null, [Validators.required, Validators.minLength(2)]],
+      text: [ null, [Validators.required, Validators.minLength(5)]],
     })
     if (this.commponentType === 'update') {
       this.formGroup.setValue({
@@ -79,9 +81,9 @@ export class AdminPostComponent {
     }
 
     this.formGroup.valueChanges.pipe(
-      takeUntil(this.destroyService$),
       debounceTime(1000),
       distinctUntilChanged(),
+      takeUntil(this.destroyService$),
     ).subscribe(event => {
       if(event) {
         this.disabledButton = true;

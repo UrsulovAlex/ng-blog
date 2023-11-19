@@ -8,5 +8,17 @@
         [readonly]="readonly"
         cdkTextareaAutosize
         [cdkAutosizeMinRows]="minRows"
-        [cdkAutosizeMaxRows]="maxRows"></textarea>
+        [cdkAutosizeMaxRows]="maxRows"
+        appFormcontrolValidationMsg
+        [currentControl]="(control)"
+        [currentControlName]="currentControlName"
+        [currentFormGroup] = "typeOfFormGroup"
+        (showErrors) = "showError($event)"
+    ></textarea>
 </mat-form-field>
+<ng-container *ngIf="errorMessages?.length">
+    <mat-error class="mb-4" 
+        *ngFor="let errorMsg of errorMessages; let index = index; let last = last" 
+        [ngClass]="{'mb-8': last}">
+            {{errorMsg}}</mat-error>
+</ng-container>

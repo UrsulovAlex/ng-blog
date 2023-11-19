@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import { Directive, EventEmitter, HostListener, Input, Output, inject } from '@angular/core';
 import { AbstractControl, FormControlStatus } from '@angular/forms';
 import { ENUM_FORM_GROUP } from '@shared/enum/formGroup.enem';
 import { getValidationErrors } from '@shared/helpers/getValidationErrors';
@@ -10,32 +10,17 @@ import { EMPTY, debounceTime, of, switchMap, takeUntil } from 'rxjs';
   standalone: true,
   providers: [DestroyService],
 })
-export class FormcontrolValidationMsgDirective implements OnInit{
+export class FormcontrolValidationMsgDirective {
   private destroyService$ = inject(DestroyService);
   @Input() currentControl!: AbstractControl;
   @Input() currentFormGroup: ENUM_FORM_GROUP = ENUM_FORM_GROUP.login_register;
   @Input() currentControlName: string = '';
   @Output() showErrors = new EventEmitter<string[] | null>();
-
-  ngOnInit(): void {
-    this.currentControl.statusChanges.pipe(
-      debounceTime(800),
-      switchMap((status: FormControlStatus) => {
-        if (status === 'PENDING' || status === 'DISABLED') {
-          //  TODO pending and disable
-          return EMPTY;
-        }
-
-        return of(status);
-      }),
-      takeUntil(this.destroyService$),
-    ).subscribe((status: FormControlStatus) => {
-        if (status === 'INVALID') {
-          this.showErrors.emit(getValidationErrors(this.currentControl, this.currentFormGroup, this.currentControlName));
-        } else {
-          this.showErrors.emit(getValidationErrors(this.currentControl));
-        }
-      }
-    )
+  @HostListener('blur') onBluer() {
+    if(this.currentControl.touched || this.currentControl.dirty || this.currentControl.invalid) {
+      this.showErrors.emit(getValidationErrors(this.currentControl, this.currentFormGroup, this.currentControlName));
+    } else {
+      this.showErrors.emit(getValidationErrors(this.currentControl));
+    }
   }
 }
